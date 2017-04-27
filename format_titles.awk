@@ -18,8 +18,7 @@ $0 ~ timestamp_regex {
 }
 
 #Strip leading/trailing whitespace, tildes, hyphens etc. 
-function chomp(str)
-{
+function chomp(str){
 	sub(/^[^a-zA-Z!?\[\]'"]*/, "", str);
 	sub(/[^a-zA-Z0-9!?\[\]'"]*$/, "", str);
 	return str;

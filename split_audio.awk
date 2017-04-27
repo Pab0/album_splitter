@@ -38,6 +38,6 @@ function splitTrack()
 	" -metadata title=\"" prev_title "\" -metadata track=" trackNo \
 	" -metadata album=\"" at "\" " \
 	" -acodec copy \"" trackNo ". " prev_title ".mp3\"");
-	#Adding some basic ID3 tags: title, track number and album (assumed to be the video's title, to be added)
+	#Adding some basic ID3 tags: title, track number and album (assumed to be the video's title)
 }
 #TODO: BUG: Album art (/thumbnail) is only added to first track

@@ -5,7 +5,7 @@
 #Fetch track list
 timestamp_regex="[0-9]*:?[0-5][0-9]:[0-5][0-9]"
 description=$(youtube-dl --get-description $1)
-#TODO alternatively get timestamps from YT comment if they aren't available in the desription?
+#TODO alternatively get timestamps from YT comment if they aren't available in the description?
 tracklist=$(echo "$description" | awk -f format_titles.awk)
 
 echo "Converted to [timestamp] - [title] format"
@@ -20,8 +20,8 @@ echo "$tracklist" | nl -s". " > tracklist.txt
 youtube-dl --extract-audio --embed-thumbnail --audio-format mp3 --console-title $1 
 
 #Splitting audio
-filename=$(ls *.mp3)
+filename=$(/bin/ls *.mp3)
 cat tracklist.txt | awk -v at="$album_title" -v fn="$filename" -f ../split_audio.awk 
 rm "$filename"
 
-#TODO: Add cover art
+exit 0
