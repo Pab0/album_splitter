@@ -9,7 +9,7 @@
 timestamp_regex="[0-9]*:?[0-5][0-9]:[0-5][0-9]"
 description=$(youtube-dl --get-description $1)
 #TODO alternatively get timestamps from YT comment if they aren't available in the description?
-tracklist=$(echo "$description" | awk -f format_titles.awk)
+tracklist=$(echo "$description" | awk -f format_titles.awk | tr '/' '|') #slashes aren't allowed in filenames
 
 echo "Converted to [timestamp] - [title] format"
 echo "Tracks:"
@@ -30,7 +30,7 @@ fi
 cd "$location"
 
 #Download audio
-album_title=$(youtube-dl --get-title $1)
+album_title=$(youtube-dl --get-title $1 | tr '/' '|')
 mkdir "$album_title"
 cd "$album_title"
 echo "$tracklist" | nl -s". " > tracklist.txt
