@@ -34,10 +34,10 @@ album_title=$(youtube-dl --get-title $1)
 mkdir "$album_title"
 cd "$album_title"
 echo "$tracklist" | nl -s". " > tracklist.txt
-youtube-dl --extract-audio --embed-thumbnail --audio-format mp3 --console-title $1 
+youtube-dl --id --extract-audio --embed-thumbnail --audio-format mp3 --console-title $1 
+filename="$(youtube-dl --get-id $1).mp3" #the --id option above ensures the file is named as expected
 
 #Splitting audio
-filename=$(/bin/ls *.mp3)
 cat tracklist.txt | awk -v at="$album_title" -v fn="$filename" -f "$script_location"/split_audio.awk 
 rm "$filename"
 
