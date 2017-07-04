@@ -6,13 +6,13 @@ Simple awk/bash script to split a (single-video) album from YouTube into separat
 ./album_splitter.sh URL [download_location]
 ```
 ## How to use
-Simply copy the album's YouTube URL and pass it as an argument to album_splitter.sh
+Simply copy the album's YouTube URL and pass it as an argument to album_splitter.sh:
 ```
 ./album_splitter.sh https://www.youtube.com/watch?v=3x4mpl3_1d
 ```
 The script will then download the audio, and create a new directory containing the separate tracks and a tracklist.
 
-By default, the album will be downloaded to the current directory. Another directory may be specified as an argument after the URL , such as
+By default, the album will be downloaded to the current directory. Another directory may be specified as an argument after the URL, such as:
 ```
 ./album_splitter.sh https://www.youtube.com/watch?v=3x4mpl13_1d ~/Music
 ```

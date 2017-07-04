@@ -7,6 +7,11 @@
 
 #Fetch track list
 timestamp_regex="[0-9]*:?[0-5][0-9]:[0-5][0-9]"
+if [ -z "$(command -v youtube-dl)" ]; then
+	echo "youtube-dl required but not found on the system, please install it first"
+	exit $?
+fi
+
 description=$(youtube-dl --get-description $1)
 #TODO alternatively get timestamps from YT comment if they aren't available in the description?
 tracklist=$(echo "$description" | awk -f format_titles.awk | tr '/' '|') #slashes aren't allowed in filenames
@@ -17,14 +22,9 @@ echo "$tracklist" | nl -s". "
 
 #Switch to correct location
 script_location=$(pwd)
-if [ -z $location ]; then
-	location="."
-fi
-location="$2"
+location=${2:-"."}
 if [ ! -d "$location" ]; then
-	if [ -n "$location" ]; then
-		echo "$location isn't a directory, downloading to current directory instead"
-	fi
+	echo "$location isn't a directory, downloading to current directory instead"
 	location="."
 fi
 cd "$location"
