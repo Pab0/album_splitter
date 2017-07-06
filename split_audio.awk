@@ -9,6 +9,8 @@ BEGIN {
 }
 
 $0 ~ timestamp_regex {
+	#Removing track number from format [TrackNumber]. [Timestamp] - [TrackTitle]
+	sub(" *[0-9]*\. *", "");
 	#Splitting timestamp and title from entry
 	timestamp = $0; title =$0;
 	sub(" - .*", "", timestamp);
