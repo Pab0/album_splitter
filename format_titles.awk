@@ -9,12 +9,15 @@ BEGIN {
 #This is done in order to remove track numbers, tildes, 
 #and any other characters belonging neither to the timestamp nor to the title.
 $0 ~ timestamp_regex {
-	split($0, arr, timestamp_regex, timestamp);
+	arr[1] = $0; arr[2] = $0;
+	sub("^[^timestamp_regex]*"timestamp_regex, "", arr[1]);
+	sub(timestamp_regex".*", "", arr[2]);
+	timestamp = substr($0, match($0, timestamp_regex), RLENGTH);
 	arr[1] = chomp(arr[1]);
 	arr[2] = chomp(arr[2]);
 	title = (length(arr[1])>length(arr[2]) ? arr[1] : arr[2]);
 	#Convert to [timestamp] - [title] format
-	print timestamp[1] " - " title;
+	print timestamp " - " title;
 }
 
 #Strip leading/trailing whitespace, tildes, hyphens etc. 

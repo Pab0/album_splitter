@@ -10,20 +10,21 @@ BEGIN {
 
 $0 ~ timestamp_regex {
 	#Splitting timestamp and title from entry
-	split($0, raw_title, timestamp_regex, timestamp);
-	title = substr(raw_title[2], 4); 	#removes the " - ";
-	print "Processing track No. " trackNo+1 " " title " " timestamp[1];
+	timestamp = $0; title =$0;
+	sub(" - .*", "", timestamp);
+	sub(timestamp_regex" - ", "", title);
+	print "Processing track No. " trackNo+1 " " title " " timestamp;
 	if (NR!=1)
 		splitTrack();
-	prev_timestamp = timestamp[1];
-	prev_title = title
+	prev_timestamp = timestamp;
+	prev_title = title;
 	trackNo++;
 }
 
 END {
 	#Since end time is needed, each line generates the last line's track.
 	#After parsing all lines, only the last track remains to be generated.
-	timestamp[1] = "end"; 	#signals that this is the last track
+	timestamp = "end"; 	#signals that this is the last track
 	splitTrack();
 	print "Done splitting";
 }
@@ -32,7 +33,7 @@ function splitTrack()
 {
 	track_start = " -ss " prev_timestamp;
 	#last track doesn't need to have its ending specified
-	track_end = (timestamp[1]!="end" ? " -to " timestamp[1] : "");
+	track_end = (timestamp!="end" ? " -to " timestamp : "");
 	#Extra quoting is needed for shell calls
 	system("ffmpeg -i \"" fn "\" " track_start track_end \
 	" -metadata title=\"" prev_title "\" -metadata track=" trackNo \

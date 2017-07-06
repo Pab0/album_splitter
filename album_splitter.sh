@@ -11,7 +11,6 @@ if [ -z "$(command -v youtube-dl)" ]; then
 	echo "youtube-dl required but not found on the system, please install it first"
 	exit $?
 fi
-
 description=$(youtube-dl --get-description $1)
 #TODO alternatively get timestamps from YT comment if they aren't available in the description?
 tracklist=$(echo "$description" | awk -f format_titles.awk | tr '/' '|') #slashes aren't allowed in filenames
