@@ -9,6 +9,8 @@ BEGIN {
 }
 
 $0 ~ timestamp_regex {
+	#Removing track number from format [TrackNumber]. [Timestamp] - [TrackTitle]
+	sub(" *[0-9]*\. *", "");
 	#Splitting timestamp and title from entry
 	timestamp = $0; title =$0;
 	sub(" - .*", "", timestamp);
@@ -39,6 +41,10 @@ function splitTrack()
 	" -metadata title=\"" prev_title "\" -metadata track=" trackNo \
 	" -metadata album=\"" at "\" " \
 	" -acodec copy \"" trackNo ". " prev_title ".mp3\"");
+	print "ffmpeg -i \"" fn "\" " track_start track_end \
+	" -metadata title=\"" prev_title "\" -metadata track=" trackNo \
+	" -metadata album=\"" at "\" " \
+	" -acodec copy \"" trackNo ". " prev_title ".mp3\"";
 	#Adding some basic ID3 tags: title, track number and album (assumed to be the video's title)
 }
 #TODO: BUG: Album art (/thumbnail) is only added to first track
