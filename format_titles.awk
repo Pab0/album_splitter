@@ -22,7 +22,8 @@ $0 ~ timestamp_regex {
 
 #Strip leading/trailing whitespace, tildes, hyphens etc. 
 function chomp(str){
-	sub(/^[^a-zA-Z!?\[\]'"]*/, "", str);
+	sub(/(^[^a-zA-Z\[\]'"]*) | (^[0-9]*[^a-zA-Z])/, "", str); 
+	#Title may start with number only if immediatelly followed by letter, e.g. "9th Symphony"
 	sub(/[^a-zA-Z0-9!?\[\]'"]*$/, "", str);
 	return str;
 }
