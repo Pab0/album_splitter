@@ -31,7 +31,7 @@ END {
 	print "Done splitting";
 }
 
-function splitTrack()
+function splitTrack(    track_start,track_end)
 {
 	track_start = " -ss " prev_timestamp;
 	#last track doesn't need to have its ending specified
