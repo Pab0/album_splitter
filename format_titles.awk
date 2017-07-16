@@ -10,7 +10,7 @@ BEGIN {
 #and any other characters belonging neither to the timestamp nor to the title.
 $0 ~ timestamp_regex {
 	arr[1] = $0; arr[2] = $0;
-	sub("^[^timestamp_regex]*"timestamp_regex, "", arr[1]);
+	sub("^.*"timestamp_regex, "", arr[1]);
 	sub(timestamp_regex".*", "", arr[2]);
 	timestamp = substr($0, match($0, timestamp_regex), RLENGTH);
 	arr[1] = chomp(arr[1]);
