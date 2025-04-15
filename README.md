@@ -20,6 +20,6 @@ By default, the album will be downloaded to the current directory. Another direc
 The YouTube video should contain the titles/timestamps in its description, which the script uses to determine each track.
 
 ## Requirements
--  [youtube-dl](https://github.com/rg3/youtube-dl)
--  ffmpeg (should have been installed with youtube-dl)
+-  [yt-dlp](https://github.com/yt-dlp/yt-dlp)
+-  ffmpeg (should have been installed with yt-dlp)
 -  awk (should already be installed on most systems)
