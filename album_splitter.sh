@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #Fetches the album video's description and parses the titles and timestamps for tracks.
 #The album is then downloaded, converted to audio and split into single tracks according to the parsed track information.
 #Usage:
